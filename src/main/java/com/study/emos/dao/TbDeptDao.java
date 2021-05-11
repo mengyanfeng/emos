@@ -1,7 +1,9 @@
 package com.study.emos.dao;
 
 import com.study.emos.pojo.TbDept;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TbDeptDao {
     int deleteByPrimaryKey(Integer id);
 

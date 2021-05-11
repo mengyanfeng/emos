@@ -63,3 +63,29 @@ spring:
       authentication-database: admin # Authentication database name. 用于保存用户及权限的数据库
       username: admin
       password: abc123456
+
+# mybatis office-site : http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml # Location of MyBatis xml config file.
+  type-aliases-package: com.study.emos.pojo # Packages to search for type(Pojo) aliases. (Package delimiters are “,; \t\n”)
+                                            # 注意: DAO包不必声明，因为@Mapper指定了扫描
+  # configuration.* : Property keys for Configuration bean provided by MyBatis Core. About available nested properties
+  # see the MyBatis reference page(https://mybatis.org/mybatis-3/configuration.html#settings).
+  # NOTE: This property cannot be used at the same time with the config-location.
+  configuration:
+    # Specifies which logging implementation MyBatis should use. If this setting is not present logging implementation
+    # will be autodiscovered. SLF4J | LOG4J | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING | NO_LOGGING
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # log输出到Std out
+    # Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn.
+    map-underscore-to-camel-case: true # 映射时下划线与驼峰格式转换
+
+logging:
+  # logging.level.* : Log levels severity mapping. For instance, `logging.level.org.springframework=DEBUG`
+  level:
+    root: info
+    com.study.emos.dao: warn
+  # logging.pattern.console : Appender pattern for output to the console. Supported only with the default Logback setup.
+  # default:
+  # %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+  pattern:
+    console: "$d{HH:mm:ss} %-5level %msg%n"

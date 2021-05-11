@@ -1,7 +1,9 @@
 package com.study.emos.dao;
 
 import com.study.emos.pojo.TbRole;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TbRoleDao {
     int deleteByPrimaryKey(Integer id);
 

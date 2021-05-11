@@ -1,7 +1,9 @@
 package com.study.emos.dao;
 
 import com.study.emos.pojo.TbMeeting;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TbMeetingDao {
     int deleteByPrimaryKey(Integer id);
 

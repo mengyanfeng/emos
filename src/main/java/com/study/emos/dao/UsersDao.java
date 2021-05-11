@@ -1,7 +1,9 @@
 package com.study.emos.dao;
 
 import com.study.emos.pojo.Users;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface UsersDao {
     int deleteByPrimaryKey(Integer id);
 

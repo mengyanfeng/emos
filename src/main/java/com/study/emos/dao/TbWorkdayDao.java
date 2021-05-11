@@ -1,7 +1,9 @@
 package com.study.emos.dao;
 
 import com.study.emos.pojo.TbWorkday;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TbWorkdayDao {
     int deleteByPrimaryKey(Integer id);
 
