@@ -1,0 +1,65 @@
+# https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/html/appendix-application-properties.html
+server:
+  tomcat:
+    uri-encoding: UTF-8 # Character encoding to use to decode the URI. 用于解码Uri的字符编码
+    threads:
+      max: 10      # Maximum amount of worker threads. Tomcat最大工作线程数
+      min-spare: 2 # Minimum amount of worker threads. Tomcat最小工作线程数
+  port: 8080       # Server HTTP port.
+  servlet:
+    context-path: /emos # 必须以/开头，Context path of the application. http://IP:[PORT]/[context-path]/[path]
+
+# https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/html/appendix-application-properties.html
+spring:
+  # 关系数据库、连接池配置
+  datasource:
+    # 关系数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/emos?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource # 使用的连接池全限定类名
+    #数据库连接池配置
+    druid:
+      initial-size: 4       # 初始时，连接池中连接数 ，通常取 1 X (CPU Core)s
+      max-active: 8         # 最大连接数量，通常取 2 X (CPU Core)s
+      max-wait: 60000       # 从连接池获取连接时，允许的最大等待时间，单位毫秒。(负数表示无限制)
+      min-idle: 4           # 连接池中的最小空闲连接数 ，通常取 1 X (CPU Core)s
+      # test-while-idle的作用跟test-on-borrow是差不多的，都是在获取连接的时测试连接的有效性，如果两者都为true，则testOnBorrow
+      # 优先级高，则不会使用到testWhileIdle。
+      # test-while-idle：若为true（默认），且test-on-borrow为false时，当应用向连接池申请连接时，连接池将会判断连接是否处于
+      # 空闲状态，如果是，则验证这条连接是否可用。
+      test-while-idle: true
+      test-on-borrow: false
+      # test-on-return如果为true（默认false），当应用使用完连接，连接池回收连接的时候，会判断该连接是否还可用。
+      test-on-return: false
+
+  # https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/html/appendix-application-properties.html
+  redis:
+    # Redis 工作于单机方式（非集群方式）时，可以创建多个相互独立的数据库/字典，redis.conf中用databases可以配置数据库/字典个数，
+    # 数据库编号为从 0 ~ (databases-1)
+    database: 0 # 使用的Redis数据库编号，默认0
+    host: 127.0.0.1 # Redis Server address
+    port: 6379 # Redis Server port. ref:redis.conf
+    password: 123456 # Redis Server connection password. ref：redis.conf
+    timeout: 3000 # Redis Server connection timeout(ms)
+    # Jedis 是连接 Redis Server的客户端（类似还有Lettuce）
+    # Jedis 在实现上是直连 redis server，多线程环境下非线程安全，除非使用连接池，为每个 redis实例增加物理连接。
+    jedis:
+      pool: # redis连接池
+        # Redis作为一种内存数据库，其连接数不必对应的设置为CPU core数的1~2倍（如mysql）
+        max-active: 1000 # 连接池内可分配的最大连接数，负数表示无限制
+        max-idle: 8 # 连接池允许的最大空闲连接数
+        min-idle: 0 # 连接池中的最小空闲连接数
+        max-wait: -1 # 从连接池获取连接时，允许的最大等待时间，单位毫秒。(负数表示无限制)
+
+  # https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/html/appendix-application-properties.html
+  # 应用中用于存放非结构化的消息
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database:  emos # Database name.
+      authentication-database: admin # Authentication database name. 用于保存用户及权限的数据库
+      username: admin
+      password: abc123456
