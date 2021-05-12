@@ -75,7 +75,7 @@ mybatis:
   configuration:
     # Specifies which logging implementation MyBatis should use. If this setting is not present logging implementation
     # will be autodiscovered. SLF4J | LOG4J | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING | NO_LOGGING
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # log输出到Std out
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # sql log输出到Std out
     # Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn.
     map-underscore-to-camel-case: true # 映射时下划线与驼峰格式转换
 
